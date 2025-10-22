@@ -1,0 +1,33 @@
+table.table.dataTable.table-hover > tbody > tr:hover > * {
+  background-color: $table-hover-bg;
+  box-shadow: none !important;
+}
+
+label:not(.dt-length label) {
+  text-transform: uppercase;
+  font-size: $small-font-size;
+}
+
+/* Adapter la boîte du calendrier */
+.flatpickr-calendar {
+    border: 1px solid #ced4da; /* même bordure que Bootstrap input */
+    border-radius: 0.25rem; /* même border-radius que Bootstrap */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* Flatpickr */
+.flatpickr-current-month {
+    font-weight: 500;
+    color: $secondary;
+}
+
+.flatpickr-day:hover, .flatpickr-day.selected {
+    background-color: $primary;
+    color: $light;
+    border-radius: 0.25rem;
+}
+
+.flatpickr-day.today {
+    border-color: $primary;
+    border-radius: 0.25rem;
+}
