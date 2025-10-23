@@ -8,6 +8,7 @@
         @auth
         <form action="{{ route('logout') }}" method="POST" class="d-inline">
             @csrf
+            {{ Auth::user()->nom }} {{ Auth::user()->prenom }} &nbsp;
             <button type="submit" class="btn btn-outline-light">Se déconnecter</button>
         </form>
         @endauth

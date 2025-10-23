@@ -1,3 +1,4 @@
+@php($dismissible = $dismissible ?? false)
 @if (session('success'))
     <div
         @class([

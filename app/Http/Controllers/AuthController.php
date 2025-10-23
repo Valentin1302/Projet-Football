@@ -26,6 +26,8 @@ class AuthController extends Controller
         $user = new User;
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
+        $user->nom = $request->input('nom');
+        $user->prenom = $request->input('prenom');
         $user->save();
 
         return redirect()->route('login')->with('success', 'Inscription réussie, veuillez vous connecter.');
