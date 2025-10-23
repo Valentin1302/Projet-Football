@@ -10,6 +10,20 @@
     <form action="{{ route('register.post') }}" method="POST" class="container mt-4">
         @csrf
         <div class="mb-3">
+            <label for="nom" class="form-label">Votre Nom</label>
+            <input type="text" class="form-control @error('nom') is-invalid @enderror" id="nom" name="nom" value="{{ old('nom') }}" required>
+            @error('nom')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+
+            <label for="prenom" class="form-label mt-3">Votre Prénom</label>
+            <input type="text" class="form-control @error('prenom') is-invalid @enderror" id="prenom" name="prenom" value="{{ old('prenom') }}" required>
+            @error('prenom')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+
+        </div>
+        <div class="mb-3">
             <label for="email" class="form-label">Adresse e-mail</label>
             <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required>
             @error('email')
