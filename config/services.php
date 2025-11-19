@@ -35,4 +35,12 @@ return [
         ],
     ],
 
+    'football_data' => [
+        // Utilise FOOTBALL_DATA_API_URL ou en fallback FOOTBALL_API_BASE déjà présent dans votre .env
+        'base_url' => env('FOOTBALL_DATA_API_URL', env('FOOTBALL_API_BASE', 'https://api.football-data.org/v4')),
+        'token' => env('FOOTBALL_DATA_API_TOKEN'),
+        // Durée du cache en secondes (1h par défaut)
+        'cache_ttl' => env('FOOTBALL_DATA_CACHE_TTL', 3600),
+    ],
+
 ];

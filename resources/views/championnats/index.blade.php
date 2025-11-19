@@ -9,39 +9,38 @@
     <x-alert.success :dismissible="true" />
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3">Liste des Championnats</h1>
-    <a href="{{ route('championnats.create') }}" class="btn btn-primary">Ajouter un championnat</a>
     </div>
 
-    <table class="table table-striped table-hover align-middle">
-        <thead class="table-dark">
-            <tr>
-                <th>Nom</th>
-                <th>Pays</th>
-                <th>Créé par</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($championnats as $championnat)
-            <tr>
-                <td>{{ $championnat->nom }}</td>
-                <td>{{ $championnat->pays }}</td>
-                <td>{{ optional($championnat->user)->nom ?? '—' }}</td>
-                <td class="d-flex gap-2">
-                    <a href="{{ route('championnats.show', $championnat) }}" class="btn btn-sm btn-outline-secondary">Voir</a>
-                    <a href="{{ route('championnats.edit', $championnat) }}" class="btn btn-sm btn-outline-warning">Modifier</a>
-                    <form action="{{ route('championnats.destroy', $championnat) }}" method="POST" onsubmit="return confirm('Confirmer la suppression ?')">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-outline-danger">Supprimer</button>
-                    </form>
-                </td>
-            </tr>
-            @empty
-            <tr>
-                <td colspan="4" class="text-center">Aucun championnat enregistré.</td>
-            </tr>
-            @endforelse
-        </tbody>
-    </table>
+    <h2 class="h4 mt-5">Championnats</h2>
+    @if(!empty($apiCompetitions))
+        <table class="table table-bordered table-sm align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Nom</th>
+                    <th>Pays</th>
+                    <th>Saison courante</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($apiCompetitions as $c)
+                <tr>
+                    <td>{{ $c['name'] ?? '—' }}</td>
+                    <td>{{ $c['area']['name'] ?? '—' }}</td>
+                    <td>
+                        @php($season = $c['currentSeason'] ?? null)
+                        @if($season)
+                            {{ $season['startDate'] ?? '' }} - {{ $season['endDate'] ?? '' }}
+                        @else
+                            —
+                        @endif
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @else
+        <div class="alert alert-warning" role="alert">
+            Aucune donnée reçue de l'API Football Data. Vérifiez votre jeton, les limites de requêtes ou les logs.
+        </div>
+    @endif
 @endsection

@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('championnats', function (Blueprint $table) {
+        Schema::create('equipes', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->string('pays')->nullable();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('ville');
+            $table->string('logo')->nullable();
+            $table->year('annee_creation')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('championnats');
+        Schema::dropIfExists('equipes');
     }
 };
